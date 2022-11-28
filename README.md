@@ -1,4 +1,4 @@
 
 # pivot trading
 
-Stock trading based on pivot detection
+Stock trading based on pivot detection!
