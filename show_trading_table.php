@@ -43,9 +43,9 @@ foreach ($tickers as $ticker) {
   echo "</td>";
 
   echo "<td>";
-  //if ($lastprice>0) {
+  if ($lastprice>0) {
     echo $lastprice;
-  //}
+  }
   echo "</td>";
 
   echo "<td>";
