@@ -155,12 +155,14 @@ function draw_positions($im,$u0,$v0,$u1,$v1,$color,$xrange,$ticker_data,$positio
     }
   }
   $tick0 = 0; $tick1 = $n;
+  $np = 0;
   foreach($ticks as $tick) {
     $x0 = $u0 + ($u1-$u0)*($tick-$tick0)/($tick1-$tick0);
     $x1 = $u1;
-    $y0 = $v1-14;
-    $y1 = $v1-6;
-    imagefilledrectangle($im,$x0,$y0,$x1,$y1,$color);
+    $y0 = $v1-14-$np*2;
+    $y1 = $y0+8;
+    imagerectangle($im,$x0,$y0,$x1,$y1,$color);
+    ++$np;
   }
 }
 
@@ -189,10 +191,10 @@ function draw_actions($im,$u0,$v0,$u1,$v1,$color,$yrange,$actions) {
     $y0 = $v0 + ($v1-$v0)*($block[0]-$pmin)/($pmax - $pmin);
     $y1 = $v0 + ($v1-$v0)*($block[1]-$pmin)/($pmax - $pmin);
     $x0 = $u1+6; $x1 = $u1+14;
-    if ($block[2]==0) {
+    if ($block[2]!=0) {
       imagerectangle($im,$x0,$y0,$x1,$y1,$color);
-    } else {
-      imagefilledrectangle($im,$x0,$y0,$x1,$y1,$color);
+    //} else {
+    //  imagefilledrectangle($im,$x0,$y0,$x1,$y1,$color);
     }
   }
 }
