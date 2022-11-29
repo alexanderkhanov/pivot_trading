@@ -34,7 +34,7 @@ foreach ($tickers as $ticker) {
 
   $price_inrange = 0;
   foreach ($actions as $price => $action) {
-    if ($price<$lastprice) $price_inrange = $price;
+    if ($price<=$lastprice) $price_inrange = $price;
   }
 
   echo "<tr><td><form method=\"POST\" action=\"plot_ticker.php\"><input type=\"submit\" name=\"ticker_name\" value=\"$ticker\"></form></td>";
@@ -43,6 +43,7 @@ foreach ($tickers as $ticker) {
 
   echo "<td>";
   foreach ($positions as $date => $price) {
+    $price = number_format($price,2);
     echo "$date: $price<br>";
   }
   echo "</td>";
@@ -56,6 +57,7 @@ foreach ($tickers as $ticker) {
   echo "<td>";
   foreach ($actions as $price => $action) {
     if ($price==$price_inrange) {
+      $price = number_format($price,2);
       if ($state==0 && $action>0) {
 	echo "<span style=\"color:green\">$price: $action</span><br>";
       } else if ($state>0 && $action==0) {
