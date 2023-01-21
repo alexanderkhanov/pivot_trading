@@ -13,6 +13,7 @@ table, th, td {
 <table>
 <tr>
 <td>Ticker</td>
+<td>Last updated</td>
 <td>State</td>
 <td>Positions</td>
 <td>Last price</td>
@@ -30,7 +31,7 @@ foreach ($tickers as $ticker) {
 
   list($state,$positions,$actions) = read_dataline($ticker);
 
-  $lastprice = get_lastprice($ticker);
+  list($lastprice,$lasttime) = get_lastprice($ticker);
 
   $price_inrange = 0;
   foreach ($actions as $price => $action) {
@@ -39,7 +40,9 @@ foreach ($tickers as $ticker) {
 
   echo "<tr><td><form method=\"POST\" action=\"plot_ticker.php\"><input type=\"submit\" name=\"ticker_name\" value=\"$ticker\"></form></td>";
 
-  echo "<td>$state</td>";
+  echo "<td>$lasttime</td>";
+
+  echo "<td style=\"text-align: center\">$state</td>";
 
   echo "<td>";
   foreach ($positions as $date => $price) {
@@ -78,5 +81,8 @@ foreach ($tickers as $ticker) {
 
 ?>
 </table>
+<br/>
+<form method="POST" action="clear_scratch.php"><input type="submit" name="action_name" value="clear scratch"></form>
+<form method="POST" action="update_scratch.php"><input type="submit" name="action_name" value="update scratch"></form>
 </body>
 </html>

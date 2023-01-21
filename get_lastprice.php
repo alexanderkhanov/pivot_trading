@@ -3,6 +3,7 @@
 function get_lastprice($ticker) {
 
   $lastprice = 0;
+  $lasttime = "n/a";
 
   // try scratch first
   $filename = "scratch/$ticker.csv";
@@ -12,7 +13,10 @@ function get_lastprice($ticker) {
     $lastprice = $data[4];
     fclose($handle);
   }
-  if ($lastprice>0) return $lastprice;
+  if ($lastprice>0) {
+    $lasttime = date("Y-m-d H:i:s",filemtime($filename));
+    return array($lastprice,$lasttime);
+  }
 
   // no go? try last line of scrap
   $filename = "scrap/$ticker.csv";
@@ -33,7 +37,8 @@ function get_lastprice($ticker) {
     fclose($handle);
   }
 
-  return $lastprice;
+  $lasttime = date("Y-m-d H:i:s",filemtime($filename));
+  return array($lastprice,$lasttime);
 }
 
 ?>
