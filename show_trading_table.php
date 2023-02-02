@@ -45,9 +45,13 @@ foreach ($tickers as $ticker) {
   echo "<td style=\"text-align: center\">$state</td>";
 
   echo "<td>";
-  foreach ($positions as $date => $price) {
-    $price = number_format($price,2);
-    echo "$date: $price<br>";
+  if (count($positions)==0) {
+    echo "none";
+  } else {
+    foreach ($positions as $date => $price) {
+      $price = number_format($price,2);
+      echo "$date: $price<br>";
+    }
   }
   echo "</td>";
 
@@ -58,20 +62,24 @@ foreach ($tickers as $ticker) {
   echo "</td>";
 
   echo "<td>";
-  foreach ($actions as $price => $action) {
-    if ($price==$price_inrange) {
-      $price = number_format($price,2);
-      if ($state==0 && $action>0) {
-	echo "<span style=\"background-color:PaleGreen\">$price: $action</span><br>";
-      } else if ($state>0 && $action==0) {
-	echo "<span style=\"background-color:Pink\">$price: $action</span><br>";
-      } else if ($state>0) {
-	echo "<span style=\"background-color:PowderBlue\">$price: $action</span><br>";
+  if ($state==0 && count($actions)==1 && end($actions)==0) {
+    echo "none";
+  } else {
+    foreach ($actions as $price => $action) {
+      if ($price==$price_inrange) {
+	$price = number_format($price,2);
+	if ($state==0 && $action>0) {
+	  echo "<span style=\"background-color:PaleGreen\">$price: $action</span><br>";
+	} else if ($state>0 && $action==0) {
+	  echo "<span style=\"background-color:Pink\">$price: $action</span><br>";
+	} else if ($state>0) {
+	  echo "<span style=\"background-color:PowderBlue\">$price: $action</span><br>";
+	} else {
+	  echo "$price: $action<br>";
+	}
       } else {
 	echo "$price: $action<br>";
       }
-    } else {
-      echo "$price: $action<br>";
     }
   }
   echo "</td>";
