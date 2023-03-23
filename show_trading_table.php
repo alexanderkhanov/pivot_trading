@@ -68,12 +68,12 @@ foreach ($tickers as $ticker) {
     foreach ($actions as $price => $action) {
       if ($price==$price_inrange) {
 	$price = number_format($price,2);
-	if ($state==0 && $action>0) {
-	  echo "<span style=\"background-color:PaleGreen\">$price: $action</span><br>";
+	if (($state==0 && $action>0)||($state<10 && $action>=10)) {
+	  echo "<span style=\"background-color:#c0ffc0\">$price: $action</span><br>";
 	} else if ($state>0 && $action==0) {
-	  echo "<span style=\"background-color:Pink\">$price: $action</span><br>";
+	  echo "<span style=\"background-color:#ffc0c0\">$price: $action</span><br>";
 	} else if ($state>0) {
-	  echo "<span style=\"background-color:PowderBlue\">$price: $action</span><br>";
+	  echo "<span style=\"background-color:#ffff00\">$price: $action</span><br>";
 	} else {
 	  echo "$price: $action<br>";
 	}
