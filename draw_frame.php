@@ -147,11 +147,14 @@ function draw_points($im,$u0,$v0,$u1,$v1,$color,$fillcolor,$xrange,$yrange,$tick
 function draw_positions($im,$u0,$v0,$u1,$v1,$color,$xrange,$ticker_data,$positions) {
   $ticks = array();
   foreach($positions as $date => $price) {
-    $n = 1;
+    $n = 1; $miss = true;
     foreach ($ticker_data as $line) {
       $tdate = substr($line,0,10);
-      if ($date==$tdate) $ticks[] = $n;
+      if ($date==$tdate) { $ticks[] = $n; $miss = false; }
       ++$n;
+    }
+    if ($miss) {
+      $ticks[] = 0;
     }
   }
   $tick0 = 0; $tick1 = $n;
