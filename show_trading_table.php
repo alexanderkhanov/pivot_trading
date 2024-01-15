@@ -25,11 +25,13 @@ table, th, td {
 require "read_dataline.php";
 require "get_lastprice.php";
 
+$dir = $_GET["madir"];
+
 $tickers = explode(" ",rtrim(file_get_contents("ticker_list.txt")));
 
 foreach ($tickers as $ticker) {
 
-  list($state,$positions,$actions) = read_dataline($ticker);
+  list($state,$positions,$actions) = read_dataline($dir,$ticker);
 
   list($lastprice,$lasttime) = get_lastprice($ticker);
 
@@ -38,7 +40,7 @@ foreach ($tickers as $ticker) {
     if ($price<=$lastprice) $price_inrange = $price;
   }
 
-  echo "<tr><td><form method=\"POST\" action=\"plot_ticker.php\"><input type=\"submit\" name=\"ticker_name\" value=\"$ticker\"></form></td>";
+  echo "<tr><td><form method=\"POST\" action=\"plot_ticker.php\"><button type=\"submit\" name=\"ticker_name\" value=\"$dir:$ticker\">$ticker</button></form></td>";
 
   echo "<td>$lasttime</td>";
 

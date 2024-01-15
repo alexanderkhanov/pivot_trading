@@ -1,7 +1,7 @@
 <html>
 <body>
 <?php
-$ticker = $_POST["ticker_name"];
+list($dir,$ticker) = explode(":",$_POST["ticker_name"]);
 
 echo "Ticker: $ticker<br>\n";
 
@@ -38,7 +38,7 @@ $xrange = draw_dates($im,$font,$u0,$v0,$u1,$v1,$colors["black"],$ticker_data);
 draw_points($im,$u0,$v0,$u1,$v1,$colors["black"],$colors["background"],$xrange,$yrange,$ticker_data);
 
 require "read_dataline.php";
-list($state,$positions,$actions) = read_dataline($ticker);
+list($state,$positions,$actions) = read_dataline($dir,$ticker);
 draw_positions($im,$u0,$v0,$u1,$v1,$colors["black"],$xrange,$ticker_data,$positions);
 draw_actions($im,$u0,$v0,$u1,$v1,$colors["black"],$yrange,$actions);
 

@@ -1,13 +1,13 @@
 <?php
 
-function read_dataline($ticker) {
+function read_dataline($dir,$ticker) {
 
   $state = 0;
 
   $positions = array();
   $actions = array();
 
-  $filename = "dataline/$ticker.txt";
+  $filename = "$dir/$ticker.txt";
   if (file_exists($filename) && ($handle = fopen($filename,"r"))!==false) {
     while (($line = fgets($handle))!==false) {
       $items = explode(" ",rtrim($line));
