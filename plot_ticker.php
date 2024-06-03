@@ -50,7 +50,7 @@ ob_end_clean();
 
 imagedestroy($im);
 
-echo "<img src=\"data:image/$format;base64,$data\"><p>\n";
+echo "<img src=\"data:image/jpg;base64,$data\"><p>\n";
 ?>
 </body>
 </html>
