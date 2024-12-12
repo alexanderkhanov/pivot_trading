@@ -145,6 +145,7 @@ function draw_points($im,$u0,$v0,$u1,$v1,$color,$fillcolor,$xrange,$yrange,$tick
 }
 
 function draw_positions($im,$u0,$v0,$u1,$v1,$color,$xrange,$ticker_data,$positions) {
+  $n = 0;
   $ticks = array();
   foreach($positions as $date => $price) {
     $n = 1; $miss = true;
